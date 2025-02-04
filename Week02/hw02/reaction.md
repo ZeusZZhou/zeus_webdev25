@@ -1,0 +1,1 @@
+***** Good article to start with, I wouldn't have realized the importance of planning and wireframing before actually designing and even coding. Saves a lot of work to start with basic sketches and change with feedbacks. *****
