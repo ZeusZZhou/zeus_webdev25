@@ -2,21 +2,65 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Recipe webiste</title>
-    <meta
-      name="description"
-      content="Starter template for using semantic HTML elements to organize our code before we begin CSS layouts next week."
-    />
-    <meta name="keywords" content="HTML, Semantic HTML, Tutorial" />
-    <meta name="author" content="NYU" />
+    <style>
+        body {
+          background-color:blanchedalmond;
+          color:black;
+          display:flex;
+          flex-wrap: wrap;
+          font-family: Helvetica, Arial, sans-serif;
+        }
+  
+        header {
+            width: 100%;
+            margin: 20px 0 10px 0;
+        }  
+
+        img {
+            width: 70%;
+        }
+
+        aside {
+            width: 25%;
+            margin: 10px 10px 10px 0;
+        }
+
+        main {
+            width: 65%;
+            margin: 10px 0 10px 10px;
+        }
+
+        footer {
+            width: 100%;
+            margin: 20px 0 20px 0;
+        }
+        .crazyText {
+            font-family: fantasy;
+            color: rgb(100, 100, 255);
+            text-transform: uppercase;
+            text-shadow: 5px 5px 5px yellow;
+        }
+    </style>
   </head>
   
   <body>
-    <h1>Recipes</h1>
-    <fieldset>
-        <legend>Navigation</legend>
+    <header>
+        <h1>Recipes by Zeus</h1>
+        <nav>
+            <ul>
+                <li><a href="#"> About </a></li>
+                <li><a href="#"> Contact </a></li>
+                <li><a href="#"> Recipes </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside>
+        <h2>Navigation</h2>
         <p>
-        Go anywhere you want!
+        <span class=".crazyText"> Go anywhere you want!</span>
         </p>
         <nav>
             <ul>
@@ -47,20 +91,18 @@
                     </ul>
                 </details>
         </nav>
-    </fieldset>
-    <article>
+    </aside>
+
+    <main>
         <h2>Homemade Dumplings</h2>
         <img 
             src="https://www.allrecipes.com/thmb/eI0ID6aVZNy7SZLGECLqXT2HGF4=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/6900-dumplings-DDMFS-4x3-c03fe714205d4f24bd74b99768142864.jpg" />
-        <fieldset>
-            <legend>Introduction</legend>
+            <h2>Introduction</h2>
             <p>
-            <strong>A dumpling is a small mass of dough that can be boiled, fried, baked, or steamed. There are a ton of dumpling varieties out there, from pork- and cabbage-filled Chinese dumplings to cheesy Polish dumplings. 
+            A dumpling is a small mass of dough that can be boiled, fried, baked, or steamed. There are a ton of dumpling varieties out there, from pork- and cabbage-filled Chinese dumplings to cheesy Polish dumplings. 
             <br />They're prepared by dropping spoonfuls of dough into a pot of boiling soup or stew. The starch in the dumplings thickens the broth, resulting in a rich stew that's impossible to resist.
-            </strong>
             </p>
-        </fieldset>
-        <h3>Ingredients</h3>
+        <h2>Ingredients</h2>
         <ul>
             <li>1 cup all-purpose flour</li>
 
@@ -74,24 +116,23 @@
         
             <li>½ cup milk</li>
         </ul>
-        <h3>Directions</h3>
+        <h2>Directions</h2>
         <ol>
             <li>Gather the ingredients.</li>
             <li>Stir together flour, baking powder, sugar, and salt in a bowl.</li>
             <li>Cut in butter until mixture is crumbly. Stir in milk and mix until a batter forms that is thick enough to be scooped with a spoon. Allow batter to rest for 3 to 5 minutes.</li>
             <li>Drop batter by spoonfuls into boiling stew or soup. Cover and simmer without lifting the lid for 15 minutes. Serve.</li>
         </ol>
-    </article>
-    
-  </body>
+    </main>
 
-  <footer>
-    <p>
-        Leave a comment!
-    </p>
-    <label for="name">Name</label>
-    <input name="name" type="text" />
-    <label for="question">said: </label>
-    <textarea name="question" cols="50" rows="5"></textarea>
-    <button title="Submit">Submit</button>
-  </footer>
+    <footer>
+        <p>
+            Leave a comment!
+        </p>
+        <label for="name">Name</label>
+        <input name="name" type="text" />
+        <label for="question">said: </label>
+        <textarea name="question" cols="50" rows="5"></textarea>
+        <button title="Submit">Submit</button>
+    </footer>
+  </body>
