@@ -4,45 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Recipe webiste</title>
-    <style>
-        body {
-          background-color:blanchedalmond;
-          color:black;
-          display:flex;
-          flex-wrap: wrap;
-          font-family: Helvetica, Arial, sans-serif;
-        }
-  
-        header {
-            width: 100%;
-            margin: 20px 0 10px 0;
-        }  
-
-        img {
-            width: 70%;
-        }
-
-        aside {
-            width: 25%;
-            margin: 10px 10px 10px 0;
-        }
-
-        main {
-            width: 65%;
-            margin: 10px 0 10px 10px;
-        }
-
-        footer {
-            width: 100%;
-            margin: 20px 0 20px 0;
-        }
-        .crazyText {
-            font-family: fantasy;
-            color: rgb(100, 100, 255);
-            text-transform: uppercase;
-            text-shadow: 5px 5px 5px yellow;
-        }
-    </style>
+    <link rel="stylesheet" href="./recipe_style.css" />
   </head>
   
   <body>
@@ -59,9 +21,6 @@
 
     <aside>
         <h2>Navigation</h2>
-        <p>
-        <span class=".crazyText"> Go anywhere you want!</span>
-        </p>
         <nav>
             <ul>
                 <details>
@@ -72,7 +31,7 @@
                         <li><a href="">One-Pot Meals</a></li>
                     </ul>
                 </details>
-        
+
                 <details>
                 <summary>Meals</summary>
                     <ul>
@@ -87,7 +46,7 @@
                     <ul>
                         <li><a href="">Chicken</a></li>
                         <li><a href="">Beef</a></li>
-                        <li><a href="">Po</a></li>
+                        <li><a href="">Pork</a></li>
                     </ul>
                 </details>
         </nav>
@@ -125,10 +84,11 @@
         </ol>
     </main>
 
+    <div class="backToTop">
+        <button type="button"><a href="#top">Back to top</a></button>
+    </div>
     <footer>
-        <p>
-            Leave a comment!
-        </p>
+        <h2>Leave a comment!</h2>
         <label for="name">Name</label>
         <input name="name" type="text" />
         <label for="question">said: </label>
