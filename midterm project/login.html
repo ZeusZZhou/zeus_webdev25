@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site-Seeing - login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Tektur:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('./img/login_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: #333;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-family: 'Tektur', cursive;
+            font-size: 3rem;
+            color: red; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border: none;
+            background: none;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            font-weight: bold;
+        }
+
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #333;
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .tab.active::after {
+            width: 80%;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .primary-btn {
+            background: #333;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #555;
+        }
+
+        .secondary-btn {
+            background: #ddd;
+        }
+
+        .secondary-btn:hover {
+            background: #ccc;
+        }
+
+        .success-message {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .user-profile {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .user-profile h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+            margin-left: 30%;
+            text-align: left;
+        }
+
+        .zodiac-fortune {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .zodiac-fortune h3 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: #333;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-home:hover {
+            background: #333;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>SITE-SEEING</h1>
+        </div>
+
+        <div id="success-message" class="success-message"></div>
+
+        <div id="auth-container">
+            <div class="tabs">
+                <button class="tab active" id="login-tab" onclick="switchTab('login')">Login</button>
+                <button class="tab" id="register-tab" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <div class="form-container" id="login-form-container">
+                <h2 class="form-title">用户登录</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" required>
+                        <div class="error-message" id="username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" id="password" required>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+                    <div class="form-actions">
+                        <a href="siteseeing.html" class="secondary-btn">返回首页</a>
+                        <button type="submit" class="primary-btn">登录</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container" id="register-form-container" style="display: none;">
+                <h2 class="form-title">用户注册</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-username">用户名</label>
+                        <input type="text" id="reg-username" required>
+                        <div class="error-message" id="reg-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">密码</label>
+                        <input type="password" id="reg-password" required>
+                        <div class="error-message" id="reg-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">确认密码</label>
+                        <input type="password" id="confirm-password" required>
+                        <div class="error-message" id="confirm-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">出生日期</label>
+                        <input type="date" id="birthdate" required>
+                        <div class="error-message" id="birthdate-error"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="secondary-btn" onclick="switchTab('login')">已有账号</button>
+                        <button type="submit" class="primary-btn">注册</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="user-profile" id="user-profile">
+            <h2>个人资料</h2>
+            <div class="profile-info" id="profile-info">
+            </div>
+            <div class="zodiac-fortune" id="zodiac-fortune">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="siteseeing.html" class="back-home">返回首页</a>
+                <button class="primary-btn" id="logout-btn" style="margin-left: 10px;">注销</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // user system
+        const userSystem = {
+            // get all
+            getAllUsers: function() {
+                const users = localStorage.getItem('siteseeing_users');
+                return users ? JSON.parse(users) : {};
+            },
+            
+            // store all
+            saveAllUsers: function(users) {
+                localStorage.setItem('siteseeing_users', JSON.stringify(users));
+            },
+            
+            // register
+            register: function(username, password, birthdate) {
+                const users = this.getAllUsers();
+                
+                // check if username occupied
+                if (users[username]) {
+                    return { success: false, message: '用户名已存在' };
+                }
+                
+                // create user
+                users[username] = {
+                    password: this.hashPassword(password), // hashing password
+                    birthdate: birthdate,
+                    zodiac: this.calculateZodiac(birthdate),
+                    registeredDate: new Date().toISOString(),
+                    preferences: {
+                        favoriteCategories: [],
+                        visitedSites: []
+                    }
+                };
+                
+                this.saveAllUsers(users);
+                return { success: true, message: '注册成功' };
+            },
+            
+            // login
+            login: function(username, password) {
+                const users = this.getAllUsers();
+                
+                if (!users[username]) {
+                    return { success: false, message: '用户不存在' };
+                }
+                
+                if (users[username].password !== this.hashPassword(password)) {
+                    return { success: false, message: '密码错误' };
+                }
+                
+                // store user
+                localStorage.setItem('siteseeing_currentUser', username);
+                return { 
+                    success: true, 
+                    message: '登录成功', 
+                    userData: users[username] 
+                };
+            },
+            
+            // get user
+            getCurrentUser: function() {
+                const username = localStorage.getItem('siteseeing_currentUser');
+                if (!username) return null;
+                
+                const users = this.getAllUsers();
+                return {
+                    username: username,
+                    ...users[username]
+                };
+            },
+            
+            // removal
+            logout: function() {
+                localStorage.removeItem('siteseeing_currentUser');
+                return { success: true, message: '已注销' };
+            },
+            
+            // hashing
+            hashPassword: function(password) {
+                let hash = 0;
+                for (let i = 0; i < password.length; i++) {
+                    hash = ((hash << 5) - hash) + password.charCodeAt(i);
+                    hash |= 0; // 32-bit
+                }
+                return hash.toString(16);
+            },
+            
+            // calculate zodiac
+            calculateZodiac: function(birthdate) {
+                const date = new Date(birthdate);
+                const month = date.getMonth() + 1;
+                const day = date.getDate();
+                
+                if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return "白羊座";
+                if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return "金牛座";
+                if ((month === 5 && day >= 21) || (month === 6 && day <= 21)) return "双子座";
+                if ((month === 6 && day >= 22) || (month === 7 && day <= 22)) return "巨蟹座";
+                if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return "狮子座";
+                if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return "处女座";
+                if ((month === 9 && day >= 23) || (month === 10 && day <= 23)) return "天秤座";
+                if ((month === 10 && day >= 24) || (month === 11 && day <= 22)) return "天蝎座";
+                if ((month === 11 && day >= 23) || (month === 12 && day <= 21)) return "射手座";
+                if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return "摩羯座";
+                if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return "水瓶座";
+                return "双鱼座";
+            },
+            
+            // update preference
+            updatePreferences: function(username, preferences) {
+                const users = this.getAllUsers();
+                if (!users[username]) return false;
+                
+                users[username].preferences = {
+                    ...users[username].preferences,
+                    ...preferences
+                };
+                
+                this.saveAllUsers(users);
+                return true;
+            }
+        };
+
+        // get fortune
+        function getZodiacFortune(zodiac) {
+            const fortunes = {
+                "白羊座": "今天充满活力，适合开始新项目。适宜：创意设计、体育活动。忌讳：冲动决策。",
+                "金牛座": "财运不错，可能会有意外收获。适宜：投资理财、购物。忌讳：过度消费。",
+                "双子座": "沟通能力强，适合社交活动。适宜：谈判、演讲、写作。忌讳：轻信他人。",
+                "巨蟹座": "家庭关系和谐，心情愉快。适宜：家庭聚会、烹饪。忌讳：工作过度。",
+                "狮子座": "创意爆发，工作中表现出色。适宜：展示才能、领导项目。忌讳：自我中心。",
+                "处女座": "注意细节，完美主义帮助你解决问题。适宜：整理归纳、健康检查。忌讳：过度担忧。",
+                "天秤座": "人际关系和谐，是解决纠纷的好日子。适宜：调解冲突、美学活动。忌讳：优柔寡断。",
+                "天蝎座": "直觉敏锐，适合做重要决定。适宜：研究分析、战略规划。忌讳：多疑。",
+                "射手座": "冒险精神高涨，可能有新发现。适宜：旅行、学习新知识。忌讳：言行鲁莽。",
+                "摩羯座": "职场上有突破，坚持就会有收获。适宜：职业规划、建立联系。忌讳：工作倦怠。",
+                "水瓶座": "思维活跃，创新点子不断。适宜：社交活动、科技使用。忌讳：固执己见。",
+                "双鱼座": "艺术灵感充沛，感情生活甜蜜。适宜：创作、表达感情。忌讳：逃避现实。"
+            };
+            
+            return fortunes[zodiac] || "星座运势加载中...";
+        }
+
+        // switching tabs
+        function switchTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('login-tab').classList.add('active');
+                document.getElementById('register-tab').classList.remove('active');
+                document.getElementById('login-form-container').style.display = 'block';
+                document.getElementById('register-form-container').style.display = 'none';
+            } else {
+                document.getElementById('login-tab').classList.remove('active');
+                document.getElementById('register-tab').classList.add('active');
+                document.getElementById('login-form-container').style.display = 'none';
+                document.getElementById('register-form-container').style.display = 'block';
+            }
+        }
+
+        // show profile
+        function showUserProfile(user) {
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('user-profile').style.display = 'block';
+            
+            // format date
+            const birthDate = new Date(user.birthdate);
+            const formattedBirthdate = `${birthDate.getFullYear()}年${birthDate.getMonth() + 1}月${birthDate.getDate()}日`;
+            
+            // user profile
+            const profileInfo = document.getElementById('profile-info');
+            profileInfo.innerHTML = `
+                <p><strong>Username:</strong> ${user.username}</p>
+                <p><strong>Birth Date:</strong> ${formattedBirthdate}</p>
+                <p><strong>Zodiac:</strong> ${user.zodiac}</p>
+                <p><strong>Registered Date:</strong> ${new Date(user.registeredDate).toLocaleDateString()}</p>
+            `;
+            
+            // zodiac 
+            const zodiacFortune = document.getElementById('zodiac-fortune');
+            zodiacFortune.innerHTML = `
+                <h3>${user.zodiac}今日运势</h3>
+                <p>${getZodiacFortune(user.zodiac)}</p>
+            `;
+        }
+
+        // show success
+        function showSuccessMessage(message) {
+            const messageElement = document.getElementById('success-message');
+            messageElement.textContent = message;
+            messageElement.style.display = 'block';
+            
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000);
+        }
+
+        // show error
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        // clear error
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(element => {
+                element.textContent = '';
+            });
+        }
+
+        // check if loged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = userSystem.getCurrentUser();
+            if (user) {
+                showUserProfile(user);
+            }
+            
+            // submit login form
+            document.getElementById('login-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                clearErrors();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                
+                if (!username) {
+                    showError('username-error', '请输入用户名');
+                    return;
+                }
+                
+                if (!password) {
+                    showError('password-error', '请输入密码');
+                    return;
+                }
+                
+                const result = userSystem.login(username, password);
+                
+                if (result.success) {
+                    showSuccessMessage('登录成功！');
+                    setTimeout(() => {
+                        showUserProfile({username, ...result.userData});
+                    }, 1000);
+                } else {
+                    showError('password-error', result.message);
+                }
+            });
+            
+            // submit register form
+            document.getElementById('register-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                clearErrors();
+                
+                const username = document.getElementById('reg-username').value.trim();
+                const password = document.getElementById('reg-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const birthdate = document.getElementById('birthdate').value;
+                
+                // check username
+                if (!username) {
+                    showError('reg-username-error', '请输入用户名');
+                    return;
+                }
+                
+                if (username.length < 3) {
+                    showError('reg-username-error', '用户名至少需要3个字符');
+                    return;
+                }
+                
+                // check password
+                if (!password) {
+                    showError('reg-password-error', '请输入密码');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    showError('reg-password-error', '密码至少需要6个字符');
+                    return;
+                }
+                
+                // confirm password
+                if (password !== confirmPassword) {
+                    showError('confirm-password-error', '两次输入的密码不一致');
+                    return;
+                }
+                
+                // check birth date
+                if (!birthdate) {
+                    showError('birthdate-error', '请选择出生日期');
+                    return;
+                }
+                
+                const result = userSystem.register(username, password, birthdate);
+                
+                if (result.success) {
+                    // login automatically after registration
+                    const loginResult = userSystem.login(username, password);
+                    showSuccessMessage('注册成功！');
+                    
+                    setTimeout(() => {
+                        showUserProfile({username, ...loginResult.userData});
+                    }, 1000);
+                } else {
+                    showError('reg-username-error', result.message);
+                }
+            });
+            
+            // removal button
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                userSystem.logout();
+                document.getElementById('user-profile').style.display = 'none';
+                document.getElementById('auth-container').style.display = 'block';
+                showSuccessMessage('已成功注销');
+                
+                // clear form
+                document.getElementById('login-form').reset();
+                document.getElementById('register-form').reset();
+                clearErrors();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background 0.5s ease-in-out;
+}
+
+h1 {
+    font-size: 47px;
+}
+
+.tektur-font {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 700;
+    color: red;
+}
+
+h2 {
+    font-size: 30px
+}
+
+.subtitle {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+/* default text */
+.subtitle::before {
+    content: "I'm down for whatever !";
+}
+
+/* change text on hover */
+.subtitle:hover::before {
+    content: "Who am I ?";
+}
+
+.subtitle_2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+/* default text */
+.subtitle_2::before {
+    content: "Are you ?";
+}
+
+/* change text on hover */
+.subtitle_2:hover::before {
+    content: "Who are you ?";
+}
+
+/* button */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.category {
+    width: 120px;
+    height: 120px;
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* set the last button in the middle */
+.category:nth-child(7) {
+    grid-column: 2 / 3; 
+}
+
+/* change button pattern on hover (pc) */
+@media (hover: hover) {
+    .category:hover {
+        background: green;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .category:hover::after {
+        content: "GO!";
+    }
+
+    .category:hover span {
+        display: none;
+    }
+
+    /* lower the others' opacity */
+    .grid:hover .category {
+        opacity: 0.3;
+    }
+
+    .grid .category:hover {
+        opacity: 1;
+    }
+}
+
+/* media on mobile*/
+@media (max-width: 768px) {
+    .category {
+        background-size: cover;
+        background-position: center;
+    }
+    /* unique backgrounds */
+    .category:nth-child(1) { background-image: url('./img_mobile/happy.jpg'); }
+    .category:nth-child(2) { background-image: url('./img_mobile/love.jpeg'); }
+    .category:nth-child(3) { background-image: url('./img_mobile/sad.jpeg'); }
+    .category:nth-child(4) { background-image: url('./img_mobile/explore.jpeg'); }
+    .category:nth-child(5) { background-image: url('./img_mobile/work.jpeg'); }
+    .category:nth-child(6) { background-image: url('./img_mobile/thrill.jpeg'); }
+    .category:nth-child(7) { background-image: url('./img_mobile/vacation.jpeg'); }
+}
+
+/* full screen background on click */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Tektur', sans-serif;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* "GO!" effect*/
+.fullscreen-overlay.show {
+    opacity: 1;
+    z-index: 100;
+    animation: expandText 1s ease-in-out forwards;
+}
+
+@keyframes expandText {
+    0% { font-size: 50px; }
+    100% { font-size: 150px; }
+}
