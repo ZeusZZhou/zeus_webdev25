@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site-Seeing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Tektur:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <!-- title -->
+    <h2>Let's go</h2>
+    <h1><span style class="tektur-font">SITE-SEEING</span></h1>
+    <p class="subtitle" onclick="goToAboutUs()"></p>
+    <p class="subtitle_2" onclick="goToLogin()"></p>
+
+    <!-- buttons -->
+    <div class="grid">
+        <div class="category" onmouseover="changeBackground('happy')" onclick="handleClick('Happy')"><span>Happy</span></div>
+        <div class="category" onmouseover="changeBackground('love')" onclick="handleClick('Love')"><span>Love</span></div>
+        <div class="category" onmouseover="changeBackground('sad')" onclick="handleClick('Sad')"><span>Sad</span></div>
+        <div class="category" onmouseover="changeBackground('explore')" onclick="handleClick('Explore')"><span>Explore</span></div>
+        <div class="category" onmouseover="changeBackground('work')" onclick="handleClick('Work')"><span>Work</span></div>
+        <div class="category" onmouseover="changeBackground('thrill')"onclick="handleClick('Thrill')"><span>Thrill</span></div>
+        <div class="category" onmouseover="changeBackground('vacation')" onclick="handleClick('Vacation')"><span>Vacation</span></div>
+    </div>
+
+    <!-- GO! effect -->
+    <div id="fullscreen-overlay" class="fullscreen-overlay">GO!</div>
+</body>
+</html>

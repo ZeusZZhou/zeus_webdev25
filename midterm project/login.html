@@ -398,7 +398,7 @@
                 };
             },
             
-            // removal
+            // log out
             logout: function() {
                 localStorage.removeItem('siteseeing_currentUser');
                 return { success: true, message: '已注销' };
@@ -630,7 +630,7 @@
                 }
             });
             
-            // removal button
+            // log out button
             document.getElementById('logout-btn').addEventListener('click', function() {
                 userSystem.logout();
                 document.getElementById('user-profile').style.display = 'none';
