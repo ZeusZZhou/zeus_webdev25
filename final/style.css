@@ -78,9 +78,12 @@ h2 {
     transition: all 0.3s ease-in-out;
 }
 
-/* set the last button in the middle */
 .category:nth-child(7) {
-    grid-column: 2 / 3; 
+    background: goldenrod
+}
+
+.category:nth-child(9) {
+    background: goldenrod
 }
 
 /* change button pattern on hover (pc) */
@@ -123,7 +126,9 @@ h2 {
     .category:nth-child(4) { background-image: url('./img_mobile/explore.jpeg'); }
     .category:nth-child(5) { background-image: url('./img_mobile/work.jpeg'); }
     .category:nth-child(6) { background-image: url('./img_mobile/thrill.jpeg'); }
-    .category:nth-child(7) { background-image: url('./img_mobile/vacation.jpeg'); }
+    .category:nth-child(7) { background-image: url('./img/weather_h.webp'); }
+    .category:nth-child(8) {background-image: url('./img_mobile/vacation.jpeg');}
+    .category:nth-child(9) {background-image: url('./img_mobile/zodiac.png');}
 }
 
 /* full screen background on click */

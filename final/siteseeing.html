@@ -9,10 +9,9 @@
     <script src="script.js"></script>
 </head>
 <body>
-
     <!-- title -->
-    <h2>Let's go</h2>
-    <h1><span style class="tektur-font">SITE-SEEING</span></h1>
+    <h2>LET'S GO</h2>
+    <h1><span class="tektur-font">SITE-SEEING</span></h1>
     <p class="subtitle" onclick="goToAboutUs()"></p>
     <p class="subtitle_2" onclick="goToLogin()"></p>
 
@@ -24,10 +23,25 @@
         <div class="category" onmouseover="changeBackground('explore')" onclick="handleClick('Explore')"><span>Explore</span></div>
         <div class="category" onmouseover="changeBackground('work')" onclick="handleClick('Work')"><span>Work</span></div>
         <div class="category" onmouseover="changeBackground('thrill')"onclick="handleClick('Thrill')"><span>Thrill</span></div>
+        <div class="category" onmouseover="changeBackground('weather')"onclick="handleClick('Weather')"><span>Weather Luck</span></div>
         <div class="category" onmouseover="changeBackground('vacation')" onclick="handleClick('Vacation')"><span>Vacation</span></div>
+        <div class="category" onmouseover="changeBackground('zodiac')" onclick="handleClick('Zodiac')"><span>Zodiac Luck</span></div>
     </div>
 
     <!-- GO! effect -->
     <div id="fullscreen-overlay" class="fullscreen-overlay">GO!</div>
+    <script>
+        // info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('site_seeing_current_user');
+            const users = JSON.parse(localStorage.getItem('site_seeing_users') || '{}');
+            let info = '';
+            if (username && users[username]) {
+                const user = users[username];
+                info = `<span style="color:#FFD700;">Welcome, ${username}! Your zodiac: <b>${user.zodiac || 'Unknown'}</b></span>`;
+            }
+            document.getElementById('welcome').innerHTML = info;
+        });
+    </script>
 </body>
 </html>

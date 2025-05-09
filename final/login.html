@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Site-Seeing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Tektur:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+        }
+
+        header {
+            background: black;
+            padding: 20px;
+        }
+
+        .tektur-font {
+            font-family: 'Tektur', sans-serif;
+            font-weight: 700;
+            color: red;
+        }
+
+        .dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        h2 {
+            font-size: 30px
+        }
+
+        .container { 
+            max-width: 400px; 
+            margin: 40px auto; 
+            background: rgba(255,255,255,0.08); 
+            padding: 30px; 
+            border-radius: 12px; 
+        }
+
+        h1 { 
+            font-size: 47px; 
+            font-family: 'Tektur', sans-serif; 
+        }
+
+        h1 .tektur-font:hover {
+            color: green;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            margin-top: 16px; 
+        }
+        input { 
+            width: 100%; 
+            padding: 8px 12px; 
+            margin-top: 4px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+        }
+        .btn { 
+            
+            width: 100%; 
+            margin-top: 24px; 
+            padding: 10px 0; 
+            background: red; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 18px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: background 0.3s; 
+        }
+        .btn:hover { 
+            background: green; 
+        }
+        .btn_reverse { 
+            width: 100%; 
+            margin-top: 24px; 
+            padding: 10px 0; 
+            background: green; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 18px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: background 0.3s; 
+        }
+        .btn_reverse:hover { 
+            background: red; 
+        }
+        .result { 
+            margin-top: 18px; 
+            font-size: 16px; 
+            color: #FFD700; 
+        }
+        .back { 
+            display: inline-block; 
+            margin-top: 18px; 
+            color: red; 
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h2>YOU ARE</h2>
+        <h1 onclick="goHome()"><span class="tektur-font">SITE-SEEING</span></h1>
+        <h2><span class="dancing-script">Welcome back!</span></h2>
+    </header>
+    <div class="container">
+        <form id="login-form">
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="result" id="result"></div>
+        <a href="register.html" class="back" style="color: #FFD700">Don't have an account? Register</a><br/>
+    </div>
+    <script>
+        document.getElementById('login-form').onsubmit = function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('result');
+            let users = JSON.parse(localStorage.getItem('site_seeing_users') || '{}');
+            if (!users[username] || users[username].password !== password) {
+                resultDiv.textContent = "Invalid username or password.";
+                return;
+            }
+            localStorage.setItem('site_seeing_current_user', username);
+            window.location.href = 'siteseeing.html';
+        }
+        
+        const horoscope = {
+            Aries: "Today is a great day to start something new!",
+            Taurus: "Stability is yours. Enjoy simple pleasures.",
+            Gemini: "Communication will bring you opportunities.",
+            Cancer: "Take care of yourself and those you love.",
+            Leo: "Show your talents! Confidence brings rewards.",
+            Virgo: "Stay organized, and good luck will follow.",
+            Libra: "Harmony surrounds you. Seek balance.",
+            Scorpio: "Trust your intuition. Secrets may be revealed.",
+            Sagittarius: "Adventure is calling. Say yes to the unknown.",
+            Capricorn: "Hard work pays off. Stay focused.",
+            Aquarius: "Innovation leads the way. Embrace change.",
+            Pisces: "Let your creativity flow freely today."
+        };
+
+        function renderUserInfo() {
+            const username = localStorage.getItem('site_seeing_current_user');
+            const users = JSON.parse(localStorage.getItem('site_seeing_users') || '{}');
+            if (username && users[username]) {
+                const user = users[username];
+                document.querySelector('.container').innerHTML = `
+                    <h2 style="color: #FFD700;">Hello, ${username}!</h2>
+                    <p>Your zodiac: <b>${user.zodiac}</b></p>
+                    <p>Today's horoscope: </p>
+                    <p><span style="color: #FFD700; font-weight: bold">${horoscope[user.zodiac] || ''}</span><p/>
+                    <button id="logout-btn" class="btn_reverse";">Logout</button>
+                `;
+                document.getElementById('logout-btn').onclick = function() {
+                    localStorage.removeItem('site_seeing_current_user');
+                    window.location.href = 'siteseeing.html';
+                };
+            }
+        }
+        window.onload = function() {
+            renderUserInfo();
+        };
+
+        function goHome() {
+            window.location.href = "siteseeing.html";
+        }
+    </script>
+    
+</body>
+</html>

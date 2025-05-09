@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Site-Seeing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Tektur:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background: black; 
+            color: white; 
+        }
+
+        header {
+            background: black;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 47px;
+        }
+
+        .tektur-font {
+            font-family: 'Tektur', sans-serif;
+            font-weight: 700;
+            color: red;
+        }
+
+        .dancing-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        h2 {
+            font-size: 30px
+        }
+
+        .container { 
+            max-width: 400px; 
+            margin: 40px auto; 
+            background: rgba(255,255,255,0.08); 
+            padding: 30px; 
+            border-radius: 12px; 
+        }
+
+        h1 { 
+            font-size: 47px; 
+            font-family: 'Tektur', sans-serif; 
+        }
+
+        h1 .tektur-font:hover {
+            color: green;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            margin-top: 16px; 
+        }
+
+        input { 
+            width: 100%; 
+            padding: 8px 12px; 
+            margin-top: 4px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+        }
+
+        .btn { 
+            width: 100%; 
+            margin-top: 24px; 
+            padding: 10px 0; 
+            background: red; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 18px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: background 0.3s; 
+        }
+
+        .btn:hover { 
+            background: green; 
+        }
+
+        .result { 
+            margin-top: 18px; 
+            font-size: 16px; 
+            color: #FFD700; 
+        }
+
+        .back { 
+            display: inline-block; 
+            margin-top: 18px; 
+            color: #FFD700; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>JOIN THE</h2>
+        <h1 onclick="goHome()"><span class="tektur-font">SITE-SEEING</span></h1>
+        <h2><span class="dancing-script">Tell us about yourself!</span></h2>
+    </header>
+    <div class="container">
+        <form id="register-form">
+            <label for="username">Username <span style="color:#FFD700">*</span></label>
+            <input type="text" id="username" required>
+            <label for="password">Password <span style="color:#FFD700">*</span></label>
+            <input type="password" id="password" required>
+            <label for="birthday">Birthday <span style="color:#FFD700">*</span></label>
+            <input type="date" id="birthday" required>
+            <button type="submit" class="btn">Register</button>
+        </form>
+        <div class="result" id="result"></div>
+        <a href="login.html" class="back">Already have an account? Login</a><br/>
+
+    </div>
+    <script>
+        function getZodiac(month, day) {
+            const zodiacs = [
+                { name: "Capricorn", from: [12, 22], to: [1, 19] },
+                { name: "Aquarius", from: [1, 20], to: [2, 18] },
+                { name: "Pisces", from: [2, 19], to: [3, 20] },
+                { name: "Aries", from: [3, 21], to: [4, 19] },
+                { name: "Taurus", from: [4, 20], to: [5, 20] },
+                { name: "Gemini", from: [5, 21], to: [6, 21] },
+                { name: "Cancer", from: [6, 22], to: [7, 22] },
+                { name: "Leo", from: [7, 23], to: [8, 22] },
+                { name: "Virgo", from: [8, 23], to: [9, 22] },
+                { name: "Libra", from: [9, 23], to: [10, 23] },
+                { name: "Scorpio", from: [10, 24], to: [11, 22] },
+                { name: "Sagittarius", from: [11, 23], to: [12, 21] }
+            ];
+            for (let z of zodiacs) {
+                if (
+                    (month === z.from[0] && day >= z.from[1]) ||
+                    (month === z.to[0] && day <= z.to[1])
+                ) return z.name;
+            }
+            return "Capricorn";
+        }
+        document.getElementById('register-form').onsubmit = function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const birthday = document.getElementById('birthday').value;
+            const resultDiv = document.getElementById('result');
+            if (!username || !password || !birthday) {
+                resultDiv.textContent = "Please fill all fields.";
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem('site_seeing_users') || '{}');
+            if (users[username]) {
+                resultDiv.textContent = "Username already exists.";
+                return;
+            }
+            const [year, month, day] = birthday.split('-').map(Number);
+            const zodiac = getZodiac(month, day);
+            users[username] = { password, birthday, zodiac };
+            localStorage.setItem('site_seeing_users', JSON.stringify(users));
+            localStorage.setItem('site_seeing_current_user', username);
+            window.location.href = 'siteseeing.html';
+        }
+
+        function goHome() {
+            window.location.href = "siteseeing.html";
+        }
+    </script>
+</body>
+</html>

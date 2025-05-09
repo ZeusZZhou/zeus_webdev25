@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Site-Seeing</title>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Tektur:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ✅ General Styles */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -19,17 +17,22 @@
             color: white;
         }
 
-        /* ✅ Header */
         header {
             background: black;
             padding: 20px;
         }
 
-        h1 {
-            font-size: 47px;
+        h1 { 
+            font-size: 47px; 
+            font-family: 'Tektur', sans-serif; 
         }
 
-        /* ✅ Stylish Font for "Site-Seeing" */
+        h1 .tektur-font:hover {
+            color: green;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
         .tektur-font {
             font-family: 'Tektur', sans-serif;
             font-weight: 700;
@@ -44,7 +47,6 @@
             font-size: 30px
         }
 
-        /* ✅ About Us Page Styling */
         .about-container {
             max-width: 800px;
             margin: 30px auto;
@@ -86,7 +88,6 @@
             left: 0;
         }
 
-        /* ✅ Links */
         a {
             color: #FFD700;
             text-decoration: none;
@@ -96,24 +97,6 @@
             text-decoration: underline;
         }
 
-        /* ✅ Return to Home Button */
-        .back-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: red;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .back-button:hover {
-            background: green;
-        }
-
-        /* ✅ Responsive Design */
         @media (max-width: 768px) {
             .about-container {
                 width: 90%;
@@ -126,7 +109,7 @@
 
     <header>
         <h2>About</h2>
-        <h1><span class="tektur-font">SITE-SEEING</span></h1>
+        <h1 onclick="goHome()"><span class="tektur-font">SITE-SEEING</span></h1>
         <h2><span class="dancing-script">Go as you wish!</span></h2>
     </header>
     
@@ -152,10 +135,12 @@
 
         <h2>⚠️ Disclaimer</h2>
         <p><span class="tektur-font">SITE-SEEING</span> does not guarantee the safety of all external links. Users are advised to browse responsibly. If you encounter any inappropriate or broken links, please contact us.</p>
-
-        <!-- Return to Home Button -->
-        <a href="siteseeing.html" class="back-button">Back to Home</a>
     </section>
+    <script>
+        function goHome() {
+            window.location.href = "siteseeing.html";
+        }
+    </script>
 
 </body>
 </html>
